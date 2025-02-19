@@ -1,0 +1,32 @@
+#include<stdio.h>
+void countv(int votes[],int n,int candidatevote[])
+{
+    for(int i=0;i<n;i++)
+    {
+        candidatevote[votes[i]-1]++;
+    }
+}
+int findwinner(int candidatevote[])
+{
+    int max=0;
+    for(int i=0;i<5;i++)
+    {
+        if(candidatevote[i]>candidatevote[max])
+        {
+            max=i;
+        }
+    }return max+1;
+}
+int main()
+{
+    int votes[]={ 4,4,4,3,1,2,5};
+    int n=7;
+    int candidatevote[5]={0,0,0,0,0};
+    countv(votes,n,candidatevote);
+    for(int i=0;i<n;i++)
+    {
+        printf("candidate %d votes are %d\n",i+1,candidatevote[i]);
+    }
+       printf("the winner is %d",findwinner(candidatevote));
+    return 0;
+}
