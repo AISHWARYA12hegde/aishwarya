@@ -1,0 +1,85 @@
+#include <stdio.h>
+struct employee_t
+{
+     int id;
+     float salary;
+     char name[250];
+     char depart[50];
+};
+typedef struct employee_t Employee;
+void read(Employee emp[],int n);
+void display(Employee emp[],int n);
+void saveemployee(Employee emp[],int n);
+void loademployees(Employee emp[],int n);
+Employee findhighsalary(Employee emp[],int n);
+int main ()
+{
+    int employeecount;
+    printf("enter number of employees");
+    scanf("%d",&employeecount);
+    Employee employees[1000];
+    read(employees , employeecount);
+    loademployees(employees,employeecount);
+     saveemployee(employees,employeecount);
+    
+    display(employees,employeecount);
+    Employee highsalaried=findhighsalary(employees,employeecount);
+    printf("employees witth entire :%s,%.2f (%s)\n",highsalaried.name,highsalaried.salary,highsalaried.depart);
+  return 0;  
+}
+void read(Employee emp[],int n)
+{
+  printf("enter details\n");
+  for(int i=0;i<n;i++)
+  {
+      scanf("%d %s %f %s",&emp[i].id ,emp[i].name,&emp[i].salary,emp[i].depart);
+  }
+}
+void display(Employee emp[],int n)
+{  
+    printf("employees\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d-%s-%f-%s\n",emp[i].id,emp[i].name,emp[i].salary,emp[i].depart);
+     }
+}
+Employee findhighsalary(Employee emp[],int n)
+{
+    Employee maxemployee=emp[0];
+    for(int i=0;i<n;i++)
+    {
+        if(emp[i].salary>maxemployee.salary)
+        {
+            maxemployee=emp[i];
+        }
+    } return maxemployee;
+}
+void saveemployee(Employee emp[],int n)
+{
+    FILE* file=fopen("employees,txt","w");
+    if(file==NULL)
+    {
+        printf("error");
+         return ;
+    }
+    for(int i=0;i<n;i++)
+    {
+        sprintf(file,"%d %s %.2f %s\n",,emp[i].id,emp[i].name,emp[i].salary,emp[i].depart);
+        }
+        fclose(file);
+}
+void loademployees(Employee emp[],int n)
+{
+    FILE* file=fopen("employees,txt","w");
+    if(file==NULL)
+    {
+        printf("error");
+         return ;
+    }
+    for(int i=0;i<n;i++)
+    {
+        fscanf(file,"%d %s %.2f %s\n",,emp[i].id,emp[i].name,emp[i].salary,emp[i].depart);
+        }
+        fclose(file);
+}
+    
