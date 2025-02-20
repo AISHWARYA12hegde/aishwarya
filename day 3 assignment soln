@@ -1,0 +1,65 @@
+include <stdio.h>
+#include <string.>
+void check_insurance_eligibility(int age, char pre_existing_condition[], int salary) {
+    if (age >= 18 && age <= 60 && strcmp(pre_existing_condition, "no") == 0 && salary >= 25000) {
+        printf("Eligible for Medical Insurance\n");
+    } else {
+        printf("Not Eligible for Medical Insurance\n");
+    }
+}
+
+int main() {
+    int age, salary;
+    char pre_existing_condition[4]; // To store "yes" or "no"
+    printf("Enter Age: ");
+    scanf("%d", &age);
+
+    printf("Any Pre-existing Condition? (yes/no): ");
+    scanf("%s", pre_existing_condition);
+
+    printf("Enter Monthly Salary: ");
+    scanf("%d", &salary);
+    check_insurance_eligibility(age, pre_existing_condition, salary);
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    int numVehicles;
+    char vehicleType[10];
+    int totalTollTax = 0;
+
+    printf("Enter the number of vehicles: ");
+    scanf("%d", &numVehicles);
+
+    for (int i = 0; i < numVehicles; i++) {
+        printf("Enter vehicle type (%d): ", i + 1);
+        scanf("%s", vehicleType);
+
+        switch (vehicleType[0]) {
+            case 'C':
+            case 'c':
+                totalTollTax += 50;
+                break;
+            case 'T':
+            case 't':
+                totalTollTax += 100;
+                break;
+            case 'B':
+            case 'b':
+                totalTollTax += 20;
+                break;
+            case 'S':
+            case 's':
+                totalTollTax += 80;
+                break;
+            default:
+                printf("Invalid vehicle type!\n");
+        }
+    }
+
+    printf("Total Toll Tax: ₹%d\n", totalTollTax);
+return 0;
+}
