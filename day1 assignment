@@ -1,0 +1,76 @@
+include <stdio.h>
+
+int main() {
+    int n, i, marks;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    printf("Enter marks: ");
+    for (i = 1; i <= n; i++) {
+        scanf("%d", &marks);
+
+        if (marks >= 90)
+            printf("Student %d: Grade A\n", i);
+        else if (marks >= 80)
+            printf("Student %d: Grade B\n", i);
+        else if (marks >= 70)
+            printf("Student %d: Grade C\n", i);
+        else if (marks >= 60)
+            printf("Student %d: Grade D\n", i);
+        else
+            printf("Student %d: Grade F\n", i);
+    }
+
+    return 0;
+}
+#include <stdio.h>
+
+int main() {
+    int units, bill = 0;
+
+    printf("Enter units consumed: ");
+    scanf("%d", &units);
+
+    if (units <= 100) {
+        bill = units * 2;
+    } else if (units <= 200) {
+        bill = (100 * 2) + ((units - 100) * 3);
+    } else {
+        bill = (100 * 2) + (100 * 3) + ((units - 200) * 5);
+    }
+
+    printf("Total Bill: ₹%d\n", bill);
+
+    return 0;
+}
+ #include <stdio.h>
+
+int main() {
+    int n, i;
+    int low = 0, middle = 0, high= 0;
+
+    printf("Enter the no.of employees: ");
+    scanf("%d", &n);
+
+    int salaries[n];
+
+    printf("Enter salaries: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &salaries[i]);
+
+        if (salaries[i] < 30000) {
+            low++;
+        } else if (salaries[i] >= 30000 && salaries[i] <= 70000) {
+            middle++;
+        } else {
+            high++;
+        }
+    }
+
+    printf("\nLow Income: %d\n", low);
+    printf("Middle Income: %d\n", middle);
+    printf("High Income: %d\n", high);
+
+    return 0;
+}
