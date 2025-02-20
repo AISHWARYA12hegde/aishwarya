@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <string.>
+void check_insurance_eligibility(int age, char pre_existing_condition[], int salary) {
+    if (age >= 18 && age <= 60 && strcmp(pre_existing_condition, "no") == 0 && salary >= 25000) {
+        printf("Eligible for Medical Insurance\n");
+    } else {
+        printf("Not Eligible for Medical Insurance\n");
+    }
+}
+
+int main() {
+    int age, salary;
+    char pre_existing_condition[4]; // To store "yes" or "no"
+    printf("Enter Age: ");
+    scanf("%d", &age);
+
+    printf("Any Pre-existing Condition? (yes/no): ");
+    scanf("%s", pre_existing_condition);
+
+    printf("Enter Monthly Salary: ");
+    scanf("%d", &salary);
+    check_insurance_eligibility(age, pre_existing_condition, salary);
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    int numVehicles;
+    char vehicleType[10];
+    int totalTollTax = 0;
+
+    printf("Enter the number of vehicles: ");
+    scanf("%d", &numVehicles);
+
+    for (int i = 0; i < numVehicles; i++) {
+        printf("Enter vehicle type (%d): ", i + 1);
+        scanf("%s", vehicleType);
+
+        switch (vehicleType[0]) {
+            case 'C':
+            case 'c':
+                totalTollTax += 50;
+                break;
+            case 'T':
+            case 't':
+                totalTollTax += 100;
+                break;
+            case 'B':
+            case 'b':
+                totalTollTax += 20;
+                break;
+            case 'S':
+            case 's':
+                totalTollTax += 80;
+                break;
+            default:
+                printf("Invalid vehicle type!\n");
+        }
+    }
+
+    printf("Total Toll Tax: ₹%d\n", totalTollTax);
+return 0;
+}
+
+
+#include <stdio.h>
+void atmTransaction(int choice, float *balance) {
+    float amount;
+
+    switch (choice) {
+        case 1:
+            printf("Enter Amount to Withdraw: ");
+            scanf("%f", &amount);
+            if (amount > 0 && amount <= *balance) {
+                *balance -= amount;
+                printf("Transaction Successful. Remaining Balance: ₹%.2f\n", *balance);
+            } else {
+                printf("Insufficient Balance or Invalid Amount!\n");
+            }
+            break;
+
+        case 2:
+            printf("Enter Amount to Deposit: ");
+            scanf("%f", &amount);
+            if (amount > 0) {
+                *balance += amount;
+                printf("Transaction Successful. Updated Balance: ₹%.2f\n", *balance);
+            } else {
+                printf("Invalid Deposit Amount!\n");
+            }
+            break;
+
+        case 3:
+            printf("Current Balance: ₹%.2f\n", *balance);
+            break;
+
+        default:
+            printf("Invalid Choice! Please try again.\n");
+    }
+}
+
+int main() {
+    float balance = 10000;
+    int choice;
+
+    while (1) {
+        printf("\nATM Menu:\n");
+        printf("1. Withdraw Money\n");
+        printf("2. Deposit Money\n");
+        printf("3. Check Balance\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 4) {
+            printf("Thank you for using the ATM. Goodbye!\n");
+            break;
+        }
+
+        atmTransaction(choice, &balance);
+    }
+
+    return 0;
+}
