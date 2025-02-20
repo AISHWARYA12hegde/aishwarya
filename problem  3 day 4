@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+struct fiction_t {
+    char title[300];
+    char author[200];
+    float price;
+};
+typedef struct fiction_t fic;
+
+struct nonfictional_t {
+    char title[300];
+    char subject[300];
+    float price;
+};
+typedef struct nonfictional_t nonfic;
+
+union Booktype_t {
+    fic fiction;
+    nonfic nonfiction;
+};
+typedef union Booktype_t booktype;
+
+struct Book_t {
+    int type;
+    booktype booktype;
+};
+typedef struct Book_t book;
+
+int bookcount;
+book books[MAX_SIZE];
+
+void readbooks() {
+    printf("Enter number of books: ");
+    scanf("%d", &bookcount);
+    for (int i = 0; i < bookcount; i++) {
+        printf("Enter book type (1 for fiction, 2 for nonfiction): ");
+        scanf("%d", &books[i].type);
+        switch (books[i].type) {
+            case 1:
+                printf("Enter fictional book details (title, author, price): ");
+                scanf("%s %s %f", books[i].booktype.fiction.title, books[i].booktype.fiction.author, &books[i].booktype.fiction.price);
+                break;
+            case 2:
+                printf("Enter nonfictional book details (title, subject, price): ");
+                scanf("%s %s %f", books[i].booktype.nonfiction.title, books[i].booktype.nonfiction.subject, &books[i].booktype.nonfiction.price);
+                break;
+            default:
+                printf("Invalid book type!\n");
+                break;
+        }
+    }
+}
+
+void displaybooks() {
+    for (int i = 0; i < bookcount; i++) {
+        switch (books[i].type) {
+            case 1:
+                printf("Fiction - Title: %s, Author: %s, Price: %.2f\n", books[i].booktype.fiction.title, books[i].booktype.fiction.author, books[i].booktype.fiction.price);
+                break;
+            case 2:
+                printf("Nonfiction - Title: %s, Subject: %s, Price: %.2f\n", books[i].booktype.nonfiction.title, books[i].booktype.nonfiction.subject, books[i].booktype.nonfiction.price);
+                break;
+            default:
+                printf("Unknown book type!\n");
+                break;
+        }
+    }
+}
+
+int main() {
+    readbooks();
+    displaybooks();
+    return 0;
+}
