@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef float T;
+struct Node_t{
+    T elemrnt;
+
+struct Node_t {
+    T element; // Corrected from elemrnt to element
+    struct Node_t* next;
+    struct Node_t*prev;
+    struct Node_t* prev;
+};
+typedef struct nodr_t Node;
+typedef struct{
+
+typedef struct Node_t Node; // Corrected from nodr_t to Node_t
+
+typedef struct {
+    Node* head;
+    Node* tail;
+    Node*size;
+}list;
+void init(list*list);
+void listpushfront(list*list,T element);
+void listpushback(list*list,T element);
+void listpopfront(list*list);
+void listpopback(list*list);
+int listempty(list*list);
+T listfront(list*list);
+T listback(list*list);
+
+int main()
+{
+    float salaries[]={50000,40000,48000,23000,29000};
+    list list;
+    listinit(&list);
+    for(int i=0;i<5;i++){
+        listpushback(&list,salaries[i]);
+    int size; // Changed from Node* to int
+} list;
+
+void init(list* lst);
+void listpushfront(list* lst, T element);
+void listpushback(list* lst, T element);
+void listpopfront(list* lst);
+void listpopback(list* lst);
+int listempty(list* lst);
+T listfront(list* lst);
+T listback(list* lst);
+
+int main() {
+    float salaries[] = {50000, 40000, 48000, 23000, 29000};
+    list lst; // Changed variable name to avoid confusion with type
+    init(&lst); // Corrected function name
+
+    for (int i = 0; i < 5; i++) {
+        listpushback(&lst, salaries[i]);
+    }
+    printf("the salaries are:\n");
+    for(Node*node=list.head;node!=NULL;node=node->next)
+    {
+        printf("%f\n",node->element);
+
+    printf("The salaries are:\n");
+    for (Node* node = lst.head; node != NULL; node = node->next) {
+        printf("%f\n", node->element); // Corrected from node->element to node->element
+    }
+
+    return 0;
+}
+void listinit(list*list){
+    list->head=NULL;
+    list->tail=NULL;
+    list->size=0;
+
+void init(list* lst) {
+    lst->head = NULL;
+    lst->tail = NULL;
+    lst->size = 0; // Corrected to initialize size
+}
+
+void listpushback(list* lst, T element) {
+    Node* newNode = (Node*)malloc(sizeof(Node)); // Allocate memory for new node
+    newNode->element = element;
+    newNode->next = NULL;
+    newNode->prev = lst->tail;
+
+    if (lst->tail != NULL) {
+        lst->tail->next = newNode; // Link the new node to the last node
+    } else {
+        lst->head = newNode; // If the list was empty, set head to new node
+    }
+    lst->tail = newNode; // Update the tail to the new node
+    lst->size++; // Increment the size of the list
+}
