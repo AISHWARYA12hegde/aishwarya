@@ -1,0 +1,54 @@
+nclude<stdio.h>
+int findLength(char* str) {
+    int length = 0;
+    for(char* p_ch = str; (*p_ch) != '\0'; p_ch++) {
+        length++;
+    }
+
+    return length;
+
+}
+void reverseString(char *str) {
+    int len = findLength(str);
+for(int left = 0, right=len-1; left < right; left++, right--) {
+        char temp = *(str +left); // *(str +left) == str[left]
+       *(str+left) = *(str+right);
+        *(str+right) = temp;
+    }
+}
+int main() {
+char str[255];
+printf("Enter a string:");
+scanf("%s", str);
+ printf("Before reverse:%s\n");
+reverseString(str);
+printf("Reversed string:%s\n");
+return 0;
+}
+
+
+#include<stdio.h>
+void inputMarks(int *marks, int n) {
+  printf("Enter marks:");
+    for(int I = 0; I < n; I++) {
+        scanf("%d", &marks[I]);
+    }
+}
+float calculateAverage(int *marks, int n) {
+    int sum = 0;
+    for(int I = 0; I < n; I++) {
+        sum += marks[I];
+    }
+   float average = (float)sum / (float)n;
+    return average;
+}
+int main() {
+    int n;
+    int marks[1000];
+    printf("Number of students:");
+    scanf("%d",&n);
+    inputMarks(marks, n);
+    float average = calculateAverage(marks, n);
+    printf("Average marks:%.2f", average);
+    return 0;
+}
