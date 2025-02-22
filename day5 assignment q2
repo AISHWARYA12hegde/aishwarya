@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_RESERVATIONS 2
+
+typedef struct Passenger {
+    int passenger_id;
+    char name[50];
+    struct Passenger* next;
+} Passenger;
+
+typedef struct {
+    Passenger* front;
+    Passenger* rear;
+    int size;
+} ReservationQueue;
+
+void initializeQueue(ReservationQueue* queue) {
+    queue->front = queue->rear = NULL;
+    queue->size = 0;
+}
+
+void addReservation(ReservationQueue* queue, int passenger_id, const char* name) {
+    Passenger* new_passenger = (Passenger*)malloc(sizeof(Passenger));
+    new_passenger->passenger_id = passenger_id;
+    strcpy(new_passenger->name, name);
+    new_passenger->next = NULL;
+    
+    if (queue->rear == NULL) {
+        queue->front = queue->rear = new_passenger;
+    } else {
+        queue->rear->next = new_passenger;
+        queue->rear = new_passenger;
+    }
+    queue->size++;
+
+    if (queue->size <= MAX_RESERVATIONS) {
+        printf("Booking Confirmed: Passenger %d (%s)\n", passenger_id, name);
+    } else {
+        printf("Waiting List: Passenger %d (%s)\n", passenger_id, name);
+    }
+}
+
+void processReservation(ReservationQueue* queue) {
+    if (queue->front == NULL) {
+        printf("No reservations to process\n");
+        return;
+    }
+    
+    Passenger* temp = queue->front;
+    printf("Processing Reservation: %d from %s\n", temp->passenger_id, temp->name);
+    queue->front = queue->front->next;
+    
+    if (queue->front == NULL) {
+        queue->rear = NULL;
+    }
+    
+    free(temp);
+    queue->size--;
+}
+
+void displayWaitingList(ReservationQueue* queue) {
+    if (queue->size <= MAX_RESERVATIONS) {
+        printf("No waiting list\n");
+        return;
+    }
+    
+    Passenger* temp = queue->front;
+    int count = 1;
+    while (count <= MAX_RESERVATIONS && temp != NULL) {
+        temp = temp->next;
+        count++;
+    }
+
+    printf("Waiting List: ");
+    while (temp != NULL) {
+        printf("%d (%s)", temp->passenger_id, temp->name);
+        temp = temp->next;
+        if (temp != NULL) {
+            printf(", ");
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    ReservationQueue queue;
+    initializeQueue(&queue);
+    
+    addReservation(&queue, 1, "Alice");
+    addReservation(&queue, 2, "Bob");
+    addReservation(&queue, 3, "Charlie");
+    processReservation(&queue);
+    displayWaitingList(&queue);
+    
+    return 0;
+}
